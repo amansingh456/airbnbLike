@@ -53,25 +53,24 @@ try {
 const loginUser = async (req, res, next) => {
   try {
     const user = await UserModel.findOne({ username: req.body.username });
-
+    console.log("1")
     if (!user) return next(createError(404, "User not found"));
-
+    console.log("2")
     const isPasswordCorrect = await bcrypt.compare(
       req.body.password,
       user.password
     );
     if (!isPasswordCorrect) return next(createError(400, "Wrong Password"));
 
-    // console.log(user._id,user.isSeller)
+    console.log(user._id,user.isSeller)
     const token = jwt.sign(
       { id: user._id, isSeller: user.isSeller },
       process.env.JWT_KEY
     );
-
+      console.log("toooe", token)
     const { password, isSeller, ...otherDetails } = user._doc;
-    // console.log(user)
-    res
-      .cookie("access_token", token, {
+    console.log(user)
+    res.cookie("access_token", token, {
         httpOnly: true,
       })
       .status(200)
