@@ -6,10 +6,11 @@ export const HotelContext = createContext([]);
 export const HotelProvider = ({ children }) => {
   const [hotels, setHotels] = useState([]);
   const [loading, setLoading] = useState(true);
+  
   useEffect(() => {
     const getPlaces = async () => {
       const { data } = await axiosInstance.get('/places');
-      // console.log('data: ', data);
+      console.log('data: ', data);
       setHotels(data.places);
       setLoading(false);
     };

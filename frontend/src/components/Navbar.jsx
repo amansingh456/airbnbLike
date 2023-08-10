@@ -24,7 +24,7 @@ export const Navbar = () => {
 
   return (
     <header
-      className={`flex w-full items-center justify-evenly fixed top-0 bg-white py-4  z-10 ${
+      className={` headerShadow mb-20 flex w-full items-center justify-evenly fixed top-0 bg-white py-4  z-10  ${
         hasShadow ? 'shadow-md' : ''
       }`}
     >
@@ -76,7 +76,7 @@ export const Navbar = () => {
         </div>
         {/* {user && <div className='hidden md:block'>{user.name}</div>} */}
       </Link>
-      <br className="border border-gray-600" />
+      <br className="border border-gray-600 " />
     </header>
   );
 };
