@@ -13,7 +13,7 @@ const AllData = () => {
    <div className="mt-6 px-10 grid sm:grid-cols-1  md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  gap-x-6 gap-y-8 ">
    {hotels.length > 0 &&
      hotels.map((hotel) => (
-       <Link to={`/hotels/${hotel._id}`} key={hotel._id} className=" rounded-2xl hotelsAllData">
+       <Link to={`/find/${hotel._id}`} key={hotel._id} className=" rounded-2xl hotelsAllData">
          <div className="bg-gray-500 mb-2 rounded-2xl flex ">
            {hotel.photos?.[0] && <Image src={hotel.photos?.[0]} />}
          </div>
