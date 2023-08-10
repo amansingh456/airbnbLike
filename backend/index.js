@@ -1,38 +1,53 @@
-const express = require("express")  
-const cors  = require("cors")
-const { connection } = require("./configs/db")
-const { usersRouter } = require("./routes/user.routes")
-const { handleError } = require("./middleware/errorHandler.middleware")
-const { hotelsRouter } = require("./routes/hotel.routes")
-const cookieParser = require("cookie-parser")
-require("dotenv").config()
+const express = require('express');
+const cors = require('cors');
+const connectWithDB = require('./config/db');
+require('dotenv').config();
+const cloudinary = require('cloudinary').v2;
 
+// connect with database
+connectWithDB();
 
-const app = express()
-// cors middleware for connecting client side connection to server.
-app.use(cors())
-//middleware for accessing token
-app.use(cookieParser())
-// middleware for handling json object
-app.use(express.json())
+// cloudinary configuration
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
+const app = express();
 
+// middleware to handle json
+app.use(express.json());
 
-app.get("/",(req,res)=>{
-   res.send("AirBnb Like...!")
-})
-// middlerware for handling error
-app.use(handleError)
-app.use("/api/user", usersRouter)
-app.use("/api", hotelsRouter)
+const whiteList = [
+  'https://airbnb-clone0.netlify.app',
+  'https://airbnb-1.netlify.app',
+  'http://localhost:5173',
+];
 
+// CORS 
+app.use(
+  cors({
+    credentials: true,
+    origin: function (origin, callback) {
+      if (whiteList.indexOf(origin !== -1)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by cors'));
+      }
+    },
+    exposedHeaders: ['set-cookie'],
+  })
+);
 
-app.listen(process.env.PORT,async()=>{
-   try {
-       await connection
-       console.log("Connected To DB")
-   } catch (error) {
-       console.log('error: ', error);
-   }
-   console.log(`Server is running on port ${process.env.PORT} with ❤️`)
-})
+// use express router
+app.use('/', require('./routes'));
+
+app.listen(process.env.PORT || 8000, (err) => {
+  if (err) {
+    console.log('Error in connecting to server: ', err);
+  }
+  console.log(`Server is running on port no. ${process.env.PORT}`);
+});
+
+module.exports = app;
