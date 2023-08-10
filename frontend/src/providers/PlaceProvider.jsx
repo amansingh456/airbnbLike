@@ -1,25 +1,23 @@
 import { createContext, useEffect, useState } from 'react';
 import axiosInstance from '../utils/axios';
 
-export const HotelContext = createContext([]);
+export const PlaceContext = createContext([]);
 
-export const HotelProvider = ({ children }) => {
-  const [hotels, setHotels] = useState([]);
+export const PlaceProvider = ({ children }) => {
+  const [places, setPlaces] = useState([]);
   const [loading, setLoading] = useState(true);
-  
   useEffect(() => {
     const getPlaces = async () => {
       const { data } = await axiosInstance.get('/places');
-      console.log('data: ', data);
-      setHotels(data.places);
+      setPlaces(data.places);
       setLoading(false);
     };
     getPlaces();
   }, []);
 
   return (
-    <HotelContext.Provider value={{ hotels, setHotels, setLoading, loading }}>
+    <PlaceContext.Provider value={{ places, setPlaces, setLoading, loading }}>
       {children}
-    </HotelContext.Provider>
+    </PlaceContext.Provider>
   );
 };

@@ -1,8 +1,8 @@
-import  { useState } from 'react';
-import {ImageThree} from "./Image"
-// import Image from './Image';
+import React, { useState } from 'react';
 
-const HotelGallery = ({ place }) => {
+import Image from './Image';
+
+const PlaceGallery = ({ place }) => {
   const [showAllPhotos, setShowAllPhotos] = useState(false);
 
   if (showAllPhotos) {
@@ -33,7 +33,7 @@ const HotelGallery = ({ place }) => {
           {place?.photos?.length > 0 &&
             place.photos.map((photo, index) => (
               <div key={index}>
-                <ImageThree src={photo} />
+                <Image src={photo} />
               </div>
             ))}
         </div>
@@ -98,4 +98,4 @@ const HotelGallery = ({ place }) => {
   );
 };
 
-export default HotelGallery;
+export default PlaceGallery;

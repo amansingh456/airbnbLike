@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import AccountNav from '../components/AccountNav';
 import AddressLink from '../components/AddressLink';
 import BookingDates from '../components/BookingDates';
-import HotelGallery from '../components/HotelGallery';
+import PlaceGallery from '../components/PlaceGallery';
 import Spinner from '../components/Spinner';
 import axiosInstance from '../utils/axios';
 
@@ -64,7 +64,7 @@ const SingleBookedPlace = () => {
               </div>
             </div>
           </div>
-          <HotelGallery place={booking?.place} />
+          <PlaceGallery place={booking?.place} />
         </div>
       ) : (
         <h1> No data</h1>

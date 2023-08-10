@@ -1,3 +1,4 @@
+import React from "react";
 import { differenceInCalendarDays, format } from "date-fns";
  
 const BookingDates = ({booking, className}) => {

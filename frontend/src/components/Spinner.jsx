@@ -1,6 +1,7 @@
+import React from 'react';
 import { TailSpin } from 'react-loader-spinner';
 
-const Loader = () => {
+const Spinner = () => {
   return (
     <div className='flex flex-col justify-center items-center absolute inset-1/2'>
       <TailSpin
@@ -14,4 +15,4 @@ const Loader = () => {
   );
 };
 
-export default Loader;
+export default Spinner;

@@ -1,11 +1,12 @@
-import  { useEffect,useState  } from 'react';
-// import { useContext, } from 'react';
+import  { useEffect } from 'react';
+import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-import SearchBar from './SearchBar';
-// import { UserContext } from '../providers/UserProvider';
+import { UserContext } from '../providers/UserProvider';
 
-export const Navbar = () => {
-//   const { user } = useContext(UserContext);
+import SearchBar from './SearchBar';
+
+export const Header = () => {
+  const { user } = useContext(UserContext);
   const [hasShadow, setHasShadow] = useState(false);
 
   const handleScroll = () => {
@@ -24,11 +25,11 @@ export const Navbar = () => {
 
   return (
     <header
-      className={` headerShadow mb-20 flex w-full items-center justify-evenly fixed top-0 bg-white py-4  z-10  ${
+      className={`flex w-full items-center justify-evenly fixed top-0 bg-white py-4  z-10 searchBarShadow ${
         hasShadow ? 'shadow-md' : ''
       }`}
     >
-      <Link to={'/'} className="flex items-center gap-1">
+      <Link to={'/'} className="flex items-center gap-1 ">
         <img
           className="h-8 w-8 md:h-10 md:w-10"
           src="https://cdn-icons-png.flaticon.com/512/2111/2111320.png"
@@ -36,14 +37,14 @@ export const Navbar = () => {
         />
 
         <span className="hidden md:block font-bold text-2xl text-red-500">
-          airbnb
+          airBnbLike
         </span>
       </Link>
 
       <SearchBar />
 
       <Link
-      //   to={user ? '/account' : '/login'}
+        to={user ? '/account' : '/login'}
         className="flex gap-2 items-center md:border border-gray-300 rounded-full py-2 px-4 userProfile"
       >
         <svg
@@ -74,10 +75,9 @@ export const Navbar = () => {
             />
           </svg>
         </div>
-        {/* {user && <div className='hidden md:block'>{user.name}</div>} */}
+        {user && <div className='hidden md:block'>{user.name}</div>}
       </Link>
-      <br className="border border-gray-600 " />
+      <br className="border border-gray-600" />
     </header>
   );
 };
-

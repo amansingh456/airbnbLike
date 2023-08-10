@@ -1,3 +1,4 @@
+import React from "react";
 
 const AddressLink = ({ placeAddress, className = null }) => {
   if (!className) {
